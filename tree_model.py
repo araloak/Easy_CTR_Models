@@ -87,16 +87,17 @@ def dataInfo():
 
 def LGBScore(flag=1):
     lgb_params = {
-    'boosting_type': 'gbdt',
-    'objective': 'binary',
-    'num_leaves': 50,
-    'num_round': 360,
-    'max_depth':12,
+    'boosting_type': 'gbdt',# 设置提升类型
+    'objective': 'binary',# 目标函数
+    'num_leaves': 50, #树叶数量，默认31
+    'num_round': 360, #迭代次数，通常100+
+    'max_depth':12, #树最大深度
     'learning_rate': 0.01,
-    'feature_fraction': 0.5,
-    'bagging_fraction': 0.8,
+    'feature_fraction': 0.5, # 建树的特征选择比例
+    'bagging_fraction': 0.8, #每次迭代所用数据比例，加快训练速度，减小过拟合
     'bagging_freq': 12,
-    'scale_pos_weight':5
+    'scale_pos_weight':5,
+    'metric': {'l2', 'auc'}# 评估函数
 }
     if flag==1:
         lgb_train = lgb.Dataset(x_train, y_train)
